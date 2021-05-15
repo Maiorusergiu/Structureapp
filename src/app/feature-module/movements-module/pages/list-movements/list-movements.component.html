@@ -1,0 +1,83 @@
+<div class="movementsList">
+    <h1 style="text-align: center;">List of Movements</h1>
+    <table style="width:100%">
+        <tr>
+            <th>pkMovement</th>
+            <th>XCoordinate</th>
+            <th>YCoordinate</th>
+            <th>Screen</th>
+
+        </tr>
+        <tr id="main-list" style="background-color: aliceblue" *ngFor="let movement of movements">
+            <td>{{movement?.id}}</td>
+            <td>{{movement?.xcoordinate}}</td>
+            <td>{{movement?.ycoordinate}}</td>
+            <td>{{movement?.screen}}</td>
+            <button (click)="onOpenModal(movement, 'delete')" type="button" style="margin: 10px;" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            <button (click)="onOpenModal(movement, 'edit')" type="button" style="margin: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Edit
+              </button>
+        </tr>
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete Movement with number {{deleteMovement?.id}} ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button (click)="onDeleteMovement(deleteMovement?.id)" data-dismiss="modal" type="button" class="btn btn-danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Edit Modal -->
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLongTitle">Edit Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                            <input type="hidden" ngModel={{editMovement?.id}} name="id" class="form-control" id="id">
+                            <div class="form-group">
+                                <label for="xcoordinate">XCoordinate</label>
+                                <input type="text" name="xcoordinate" ngModel={{editMovement?.xcoordinate}} name="xcoordinate" class="form-control" id="xcoordinate" placeholder="xcoordinate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ycoordinate">YCoordinate</label>
+                                <input type="text" name="ycoordinate" ngModel={{editMovement?.ycoordinate}} name="ycoordinate" class="form-control" id="ycoordinate" placeholder="ycoordinate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="screen">Screen</label>
+                                <input type="text" name="screen" ngModel={{editMovement?.screen}} name="screen" class="form-control" id="screen" placeholder="screen" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button data-dismiss="modal" (click)="updateMovement(editForm.value)" [disabled]="editForm.invalid" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </table>
+</div>

@@ -1,0 +1,133 @@
+<div class="dotsList">
+    <h1 style="text-align: center;">List of Dots</h1>
+    <table style="width:100%">
+        <tr>
+            <th>pkDot</th>
+            <th>XCoordinate</th>
+            <th>YCoordinate</th>
+            <th>Dcolor</th>
+            <th>fkFrame</th>
+        </tr>
+        <tr id="main-list" style="background-color: aliceblue" *ngFor="let dot of dots">
+            <td>{{dot?.pkDots}}</td>
+            <td>{{dot?.xcoordinate}}</td>
+            <td>{{dot?.ycoordinate}}</td>
+            <td>{{dot?.dcolor}}</td>
+            <td>{{dot?.fkFrame}}</td>
+
+            <button (click)="onOpenModal(dot, 'edit')" type="button" style="margin: 2%;" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Edit
+              </button>
+
+            <button (click)="onOpenModal(dot, 'delete')" type="button" style="margin: 2%;" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            <button (click)="onOpenModal(null, 'add')" style="margin: 2%;" type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
+                Add
+              </button>
+
+
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Dot</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete Dot with number {{deleteDot?.pkDots}}?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button (click)="onDeleteDot(deleteDot?.pkDots)" data-dismiss="modal" type="button" class="btn btn-danger">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Edit Dot</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form #editForm="ngForm">
+                                <input type="hidden" ngModel={{editDot?.pkDots}} name="pkDots" class="form-control" id="pkDots">
+                                <div class="form-group">
+                                    <label for="xcoordinate">xcoordinate</label>
+                                    <input type="text" name="xcoordinate" ngModel={{editDot?.xcoordinate}} class="form-control" id="xcoordinate" placeholder="xcoordinate" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="yCoordinate">ycoordinate</label>
+                                    <input type="text" name="ycoordinate" ngModel={{editDot?.ycoordinate}} class="form-control" id="ycoordinate" placeholder="ycoordinate" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dcolor">dcolor</label>
+                                    <input type="text" name="dcolor" ngModel={{editDot?.dcolor}} class="form-control" id="dcolor" placeholder="dcolor" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fkFrame">fkFrame</label>
+                                    <input type="text" name="fkframe" ngModel={{editDot?.fkframe}} class="form-control" id="fkframe" placeholder="fkframe" required/>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="add-dot-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button (click)="onEditDot(editForm.value)" data-dismiss="modal" type="button" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Modal -->
+            <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addModalLabel">Add Dot</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form #addForm="ngForm" (ngSubmit)="onAddDot(addForm)">
+                                <div class="form-group">
+                                    <label for="xcoordinate">xcoordinate</label>
+                                    <input type="text" name="xcoordinate" ngModel class="form-control" id="xcoordinate" placeholder="xcoordinate" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="yCoordinate">ycoordinate</label>
+                                    <input type="text" name="ycoordinate" ngModel class="form-control" id="ycoordinate" placeholder="ycoordinate" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dcolor">dcolor</label>
+                                    <input type="text" name="dcolor" ngModel class="form-control" id="dcolor" placeholder="dcolor" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fkFrame">fkFrame</label>
+                                    <input type="text" name="fkframe" ngModel class="form-control" id="fkframe" placeholder="fkframe" required/>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="add-dot-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr>
+
+
+
+
+    </table>
+</div>

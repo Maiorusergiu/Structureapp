@@ -1,0 +1,83 @@
+<div class="experimentsList">
+    <h1 style="text-align: center;">List of Experiments</h1>
+    <table style="width:100%">
+        <tr>
+            <th>pkExperiment</th>
+            <th>Response Direction</th>
+
+        </tr>
+        <tr id="main-list" style="background-color: aliceblue" *ngFor="let experiment of experiments">
+            <td>{{experiment?.pkExperiments}}</td>
+            <td>{{experiment?.responseDirection}}</td>
+
+
+            <button id="deleteButton" (click)="onOpenModal(experiment, 'delete')" type="button" style="margin: 10px;" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            <button id="editButton" (click)="onOpenModal(experiment, 'edit')" type="button" style="margin: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Edit
+              </button>
+        </tr>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Delete Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want do delete experiment with number {{delExperiment?.pkExperiments}} ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button data-dismiss="modal" (click)="deleteExperiment(delExperiment?.pkExperiments)" type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                            <input type="hidden" ngModel={{editExperiment?.pkExperiments}} name="pkExperiments" class="form-control" id="pkExperiments">
+                            <div class="form-group">
+                                <label for="responseDirection">responseDirection</label>
+                                <input type="text" name="responseDirection" ngModel={{editExperiment?.responseDirection}} name="responseDirection" class="form-control" id="responseDirection" placeholder="responseDirection" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fkSessions">fkSessions</label>
+                                <input type="text" name="fkSessions" ngModel={{editExperiment?.fkSessions}} name="fkSessions" class="form-control" id="fkSessions" placeholder="fkSessions" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fkStimuli">fkStimuli</label>
+                                <input type="text" name="fkStimuli" ngModel={{editExperiment?.fkStimuli}} name="fkStimuli" class="form-control" id="fkStimuli" placeholder="fkStimuli" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button data-dismiss="modal" (click)="updateExperiment(editForm.value)" type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </table>
+</div>

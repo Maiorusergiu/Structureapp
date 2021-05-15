@@ -1,0 +1,46 @@
+<!-- Modal -->
+
+<button id="addParticipantButton" type="button" class="btn btn-secondary" style="display: flex;
+margin: 5%;" data-toggle="modal" data-target="#addParticipantModal">
+    Add Participant
+</button>
+
+
+<div id="add-container">
+    <div class="modal fade" id="addParticipantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create a Participant</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addParticipantForm" (ngSubmit)="addParticipant()">
+                        <div class="form-group">
+                            <label for="initials">Initials</label>
+                            <input type="text" name="initials" formControlName="initials" class="form-control" id="initials" placeholder="Initials" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="text" name="age" formControlName="age" class="form-control" id="age" placeholder="Age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">Sex</label>
+                            <input type="text" name="sex" formControlName="sex" class="form-control" id="sex" placeholder="Sex" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="information">Information</label>
+                            <input type="text" name="information" formControlName="information" class="form-control" id="information" placeholder="Information" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button [disabled]="addParticipantForm.invalid" type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

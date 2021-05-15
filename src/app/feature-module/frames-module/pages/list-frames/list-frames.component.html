@@ -1,0 +1,76 @@
+<div class="framesList">
+    <h1 style="text-align: center;">List of Frames</h1>
+    <table style="width:100%">
+        <tr>
+            <th>pkFrames</th>
+            <th>Frame Index</th>
+        </tr>
+        <tr id="main-list" style="background-color: aliceblue" *ngFor="let frame of frames">
+            <td>{{frame?.pkFrames}}</td>
+            <td>{{frame?.frameIndex}}</td>
+            <td>{{frame?.fkStimulus}}</td>
+
+            <button (click)="onOpenModal(frame, 'delete')" id="deleteButton" type="button" style="margin: 10px;" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            <button (click)="onOpenModal(frame, 'edit')" id="editButton" type="button" style="margin: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Edit
+              </button>
+        </tr>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete Frame with number {{deleteFrame?.pkFrames}}?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button data-dismiss="modal" (click)="onDeleteFrame(deleteFrame?.pkFrames)" type="button" class="btn btn-danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLongTitle">Edit Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                            <input type="hidden" ngModel={{editFrame?.pkFrames}} name="pkFrames" class="form-control" id="pkFrames">
+                            <div class="form-group">
+                                <label for="frameIndex">frameIndex</label>
+                                <input type="text" name="frameIndex" ngModel={{editFrame?.frameIndex}} name="frameIndex" class="form-control" id="frameIndex" placeholder="frameIndex" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fkStimulus">fkStimulus</label>
+                                <input type="text" name="fkStimulus" ngModel={{editFrame?.fkStimulus}} name="fkStimulus" class="form-control" id="fkStimulus" placeholder="fkStimulus" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button data-dismiss="modal" (click)="updateFrame(editForm.value)" [disabled]="editForm.invalid" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </table>
+</div>

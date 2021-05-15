@@ -1,0 +1,102 @@
+<div class="participantsList">
+    <h1 style="text-align: center;">List of Participants</h1>
+    <table style="width:100%">
+        <tr>
+            <th>idParticipant</th>
+            <th>Initials</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Information</th>
+        </tr>
+        <tr id="main-list" style="background-color: aliceblue" *ngFor="let participant of participants">
+            <td>{{participant?.pkParticipants}}</td>
+            <td>{{participant?.initials}}</td>
+            <td>{{participant?.age}}</td>
+            <td>{{participant?.sex}}</td>
+            <td>{{participant?.information}}</td>
+            <!-- <button (click)="deleteParticipant(participant?.pkParticipants)" style="margin: 10px;" type="button" class="btn btn-danger">Delete</button> -->
+            <button id="openDeleteModal" (click)="onDeleteModal(participant, 'delete')" type="button" style="margin: 10px;" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            <button id="openEditModal" (click)="onEditModal(participant, 'edit')" type="button" style="margin: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Edit
+              </button>
+
+
+            <!-- Edit Modal -->
+
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLongTitle">Edit Modal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form #editForm="ngForm">
+                                <input type="hidden" ngModel={{editParticipant?.pkParticipants}} name="pkParticipants" class="form-control" id="participantId">
+                                <div class="form-group">
+                                    <label for="initials">Initials</label>
+                                    <input type="text" name="initials" ngModel={{editParticipant?.initials}} name="initials" class="form-control" id="initials" placeholder="Initials" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="text" name="age" ngModel={{editParticipant?.age}} name="age" class="form-control" id="age" placeholder="Age" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sex">Sex</label>
+                                    <input type="text" name="sex" ngModel={{editParticipant?.sex}} name="sex" class="form-control" id="sex" placeholder="Sex" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="information">Information</label>
+                                    <input type="text" name="information" ngModel={{editParticipant?.information}} name="information" class="form-control" id="information" placeholder="Information" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button data-dismiss="modal" (click)="updateParticipant(editForm.value)" [disabled]="editForm.invalid" type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <!--DELETE MODAL! -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Modal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete participant number {{delParticipant?.pkParticipants}}?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeModalButton" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button data-dismiss="modal" type="button" class="btn btn-danger" id="deleteButton" (click)="deleteParticipant(delParticipant?.pkParticipants)">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr>
+
+    </table>
+
+
+
+</div>

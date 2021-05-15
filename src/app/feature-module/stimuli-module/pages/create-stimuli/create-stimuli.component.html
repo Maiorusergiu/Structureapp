@@ -1,0 +1,54 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary" style="display: flex; margin: 5%;" data-toggle="modal" data-target="#addModal">
+    Add Stimuli
+  </button>
+
+<!--Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Stimuli</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addStimuliForm" (ngSubmit)="onAddStimuli()">
+                    <div class="form-group">
+                        <label for="lifeTime">LifeTime</label>
+                        <input type="text" name="lifeTime" formControlName="lifeTime" class="form-control" id="lifeTime" placeholder="LifeTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scolor">SColor</label>
+                        <input type="text" name="scolor" formControlName="scolor" class="form-control" id="scolor" placeholder="SColor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="direction">Direction</label>
+                        <input type="text" name="direction" formControlName="direction" class="form-control" id="direction" placeholder="Direction" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="delay">Delay</label>
+                        <input type="text" name="delay" formControlName="delay" class="form-control" id="delay" placeholder="Delay" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="coherence">Coherence</label>
+                        <input type="text" name="coherence" formControlName="coherence" class="form-control" id="coherence" placeholder="Coherence" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="velocity">Velocity</label>
+                        <input type="text" name="velocity" formControlName="velocity" class="form-control" id="velocity" placeholder="Velocity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Number</label>
+                        <input type="text" name="number" formControlName="number" class="form-control" id="number" placeholder="Number" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button [disabled]="addStimuliForm.invalid" type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

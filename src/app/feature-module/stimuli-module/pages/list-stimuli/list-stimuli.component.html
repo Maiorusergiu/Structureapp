@@ -1,0 +1,103 @@
+<div class="stimuliList">
+    <h1 style="text-align: center;">List of Stimuli</h1>
+    <table style="width:100%">
+        <tr>
+            <th>pkStimuli</th>
+            <th>LifeTime</th>
+            <th>SColor</th>
+            <th>Direction</th>
+            <th>Delay</th>
+            <th>Coherence</th>
+            <th>Velocity</th>
+            <th>Number</th>
+        </tr>
+        <tr id="main-list" style="background-color: aliceblue" *ngFor="let stimul of stimuli">
+            <td>{{stimul?.pkStimuli}}</td>
+            <td>{{stimul?.lifeTime}}</td>
+            <td>{{stimul?.scolor}}</td>
+            <td>{{stimul?.direction}}</td>
+            <td>{{stimul?.delay}}</td>
+            <td>{{stimul?.coherence}}</td>
+            <td>{{stimul?.velocity}}</td>
+            <td>{{stimul?.number}}</td>
+            <button (click)="onOpenModal(stimul, 'delete')" type="button" style="margin: 10px;" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            <button (click)="onOpenModal(stimul, 'edit')" type="button" style="margin: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Edit
+              </button>
+        </tr>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete Stimuli with number {{deleteStimuli?.pkStimuli}}?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button data-dismiss="modal" (click)="deleteStimul(deleteStimuli?.pkStimuli)" type="button" class="btn btn-danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLongTitle">Edit Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                            <input type="hidden" ngModel={{editStimuli?.pkStimuli}} name="pkStimuli" class="form-control" id="pkStimuli">
+                            <div class="form-group">
+                                <label for="lifeTime">LifeTime</label>
+                                <input type="text" name="lifeTime" ngModel={{editStimuli?.lifeTime}} name="lifeTime" class="form-control" id="lifeTime" placeholder="LifeTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="scolor">SColor</label>
+                                <input type="text" name="scolor" ngModel={{editStimuli?.scolor}} name="scolor" class="form-control" id="scolor" placeholder="SColor" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="direction">Direction</label>
+                                <input type="text" name="direction" ngModel={{editStimuli?.direction}} class="form-control" id="direction" placeholder="Direction" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="delay">Delay</label>
+                                <input type="text" name="delay" ngModel={{editStimuli?.delay}} class="form-control" id="delay" placeholder="Delay" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="coherence">Coherence</label>
+                                <input type="text" name="coherence" ngModel={{editStimuli?.coherence}} class="form-control" id="coherence" placeholder="Coherence" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="velocity">Velocity</label>
+                                <input type="text" name="velocity" ngModel={{editStimuli?.velocity}} class="form-control" id="velocity" placeholder="Velocity" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Number</label>
+                                <input type="text" name="number" ngModel={{editStimuli?.number}} class="form-control" id="number" placeholder="Number" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button data-dismiss="modal" (click)="updateStimuli(editForm.value)" [disabled]="editForm.invalid" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </table>
+</div>

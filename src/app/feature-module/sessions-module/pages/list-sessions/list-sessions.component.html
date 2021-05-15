@@ -1,0 +1,82 @@
+<div class="sessionsList">
+    <h1 style="text-align: center;">List of Sessions</h1>
+    <table style="width:100%">
+        <tr>
+            <th>pkSessions</th>
+            <th>date</th>
+            <th>time</th>
+            <th>description</th>
+        </tr>
+        <tr id="main-list" style="background-color: aliceblue" *ngFor="let session of sessions">
+            <td>{{session?.pkSessions}}</td>
+            <td>{{session?.date}}</td>
+            <td>{{session?.time}}</td>
+            <td>{{session?.description}}</td>
+            <button (click)="onOpenModal(session, 'delete')" type="button" style="margin: 10px;" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+              </button>
+            <button (click)="onOpenModal(session, 'edit')" type="button" style="margin: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Edit
+              </button>
+        </tr>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete Session with number {{deleteSession?.pkSessions}}?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button data-dismiss="modal" (click)="onDeleteSession(deleteSession?.pkSessions)" type="button" class="btn btn-danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Edit Modal -->
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLongTitle">Edit Modal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                            <input type="hidden" ngModel={{editSession?.pkSessions}} name="pkSessions" class="form-control" id="pkSessions">
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="text" name="xcoordinate" ngModel={{editSession?.date}} name="date" class="form-control" id="date" placeholder="Date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Time</label>
+                                <input type="text" name="time" ngModel={{editSession?.time}} name="time" class="form-control" id="time" placeholder="Time" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" name="description" ngModel={{editSession?.description}} class="form-control" id="description" placeholder="Description" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button data-dismiss="modal" (click)="updateSession(editForm.value)" [disabled]="editForm.invalid" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </table>
+</div>

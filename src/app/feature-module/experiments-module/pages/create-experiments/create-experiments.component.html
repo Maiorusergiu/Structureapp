@@ -1,0 +1,37 @@
+<button type="button" style="display: flex; margin: 5%;" class="btn btn-secondary" data-toggle="modal" data-target="#addModal">
+    Add an experiment
+  </button>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add an experiment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addForm" (ngSubmit)="addExperiment()">
+                    <div class="form-group">
+                        <label for="responseDirection">Response Direction</label>
+                        <input type="text" name="responseDirection" formControlName="responseDirection" class="form-control" id="responseDirection" placeholder="responseDirection" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fkSession">fkSession</label>
+                        <input type="text" name="fkSession" formControlName="fkSession" class="form-control" id="fkSession" placeholder="fkSession" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fkStimuli">fkStimuli</label>
+                        <input type="text" name="fkStimuli" formControlName="fkStimuli" class="form-control" id="fkStimuli" placeholder="fkStimuli" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
